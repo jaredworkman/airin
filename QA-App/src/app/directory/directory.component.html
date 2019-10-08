@@ -1,0 +1,10 @@
+<h1>QA App</h1>
+<p>working</p>
+<input (keyup)="getAnswersKeyword($event)">
+<div id='list_of_questions'></div>
+<div *ngFor="let value of keywordQuestions">
+    {{value}}
+</div>
+
+
+

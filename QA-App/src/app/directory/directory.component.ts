@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service'
+import { FirebaseService } from '../services/firebase.service';
+import { Observable, of, observable } from 'rxjs';
+
 @Component({
   selector: 'app-directory',
   templateUrl: './directory.component.html',
@@ -11,6 +13,7 @@ export class DirectoryComponent implements OnInit {
   stringList = [];
   loadedQuestions: Array<any>;
   QuestionsAndAnswers = new Map();
+  observableQuestions$ = new Observable();
   answers: any;
   question: string;
   keywordQuestions = [];
@@ -21,11 +24,11 @@ export class DirectoryComponent implements OnInit {
 
   getAnswersKeyword(event:any){
     this.question = event.target.value;
+    this.keywordQuestions = [];
     this.answers = this.QuestionsAndAnswers.get(this.question);
-    if(typeof(this.answers) == "undefined"){
+    if((typeof(this.answers) == "undefined") && this.question != ''){
       this.stringList.forEach(key => {
         if(key.search(this.question) != -1){
-          console.log('here',key, key.search(this.question));
           this.keywordQuestions.push(key);
         }
       })

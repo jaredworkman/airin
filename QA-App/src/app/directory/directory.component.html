@@ -4,6 +4,9 @@
 <div id='list_of_questions'></div>
 <div *ngFor="let value of keywordQuestions">
     {{value}}
+    <ul>
+      <li *ngFor="let ans of QuestionsAndAnswers.get(value)">{{ans}}</li>
+    </ul>
 </div>
 
 

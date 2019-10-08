@@ -1,0 +1,96 @@
+import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../services/firebase.service'
+import {map, startWith} from 'rxjs/operators';
+import {combineLatest, Observable, of} from 'rxjs';
+import {FormControl} from '@angular/forms';
+
+@Component({
+  selector: 'app-directory',
+  templateUrl: './directory.component.html',
+  styleUrls: ['./directory.component.scss'],
+})
+
+export class DirectoryComponent implements OnInit {
+
+  questions: Observable<String[]>;
+  foundQuestions$: Observable<String[]>;
+  
+  searchedQuestion: FormControl;
+  searchedQuestion$: Observable<string>;
+
+  stringList = [];
+  loadedQuestions: Array<any>;
+  QuestionsAndAnswers = new Map();
+  answers: any;
+  question: string;
+  keywordQuestions = [];
+    
+  constructor(
+    public firebaseService: FirebaseService
+    ) {
+      this.getQuestions();
+      this.questions = of(this.stringList);
+      this.searchedQuestion = new FormControl('');
+      this.searchedQuestion$ = this.searchedQuestion.valueChanges.pipe(startWith(''));
+      this.foundQuestions$ = combineLatest(this.stringList, this.searchedQuestion$).pipe(
+        map(([questions, searchedString]) => 
+        questions.filter(question => 
+        question.indexOf(searchedString) !== -1))
+      );
+      console.log('h1');
+      this.foundQuestions$.pipe().subscribe(value => { console.log(value)});
+      console.log('h2');
+
+    }
+
+  // getAnswersKeyword(event:any){
+  //   this.question = event.target.value;
+  //   this.answers = this.QuestionsAndAnswers.get(this.question);
+  //   if(typeof(this.answers) == "undefined"){
+  //     this.stringList.forEach(key => {
+  //       if(key.search(this.question) != -1){
+  //         console.log('here',key, key.search(this.question));
+  //         this.keywordQuestions.push(key);
+  //       }
+  //     })
+  //   }
+  // }
+  // getAnswers(event: any){
+
+  //   this.question = event.target.value;
+  //   this.firebaseService.getAnswers(this.question).subscribe(
+  //     data => {
+  //       this.answers = data.payload.data();
+  //     });;
+    
+  // }
+
+  getQuestions(){
+
+    this.firebaseService.getQuestions().subscribe(result => {
+      this.loadedQuestions = result;
+      this.loadedQuestions.forEach(question => {
+        this.stringList.push(question.payload.doc.data().question);
+        this.QuestionsAndAnswers.set(question.payload.doc.data().question, question.payload.doc.data().answer);
+      });
+    });;
+  }
+
+  ngOnInit() {
+    this.getQuestions();
+   }
+
+}
+
+
+
+
+html 
+
+
+<h1>QA App</h1>
+<p>working</p>
+<input type="text" [formControl]="searchedQuestion" placeholder="Search questions">
+<ul>
+    <li *ngFor="let question of foundQuestions$ | async">{{question}}</li>
+  </ul>

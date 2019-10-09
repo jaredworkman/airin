@@ -13,7 +13,6 @@ export class DirectoryComponent implements OnInit {
   stringList = [];
   loadedQuestions: Array<any>;
   QuestionsAndAnswers = new Map();
-  observableQuestions$ = new Observable();
   answers: any;
   question: string;
   keywordQuestions = [];
@@ -28,12 +27,14 @@ export class DirectoryComponent implements OnInit {
     this.answers = this.QuestionsAndAnswers.get(this.question);
     if((typeof(this.answers) == "undefined") && this.question != ''){
       this.stringList.forEach(key => {
+        console.log(key);
         if(key.search(this.question) != -1){
           this.keywordQuestions.push(key);
         }
       })
     }
   }
+  
   getAnswers(event: any){
 
     this.question = event.target.value;

@@ -1,13 +1,17 @@
-<h1>QA App</h1>
-<p>working</p>
-<input (keyup)="getAnswersKeyword($event)">
-<div id='list_of_questions'></div>
-<div *ngFor="let value of keywordQuestions">
-    {{value}}
-    <ul>
-      <li *ngFor="let ans of QuestionsAndAnswers.get(value)">{{ans}}</li>
-    </ul>
-</div>
+<div class='search'>
+    <h1>Search</h1>
+    <input (keyup)='getAnswersKeyword($event)'>
+  </div>
+  <div class='results'>
+      <div *ngFor="let value of keywordQuestions">
+          <div class="question-card">
+            <div class="question">{{value}} </div>
+            <div *ngFor="let ans of QuestionsAndAnswers.get(value)">
+                <div class="answer-card">{{ans}}</div>
+            </div>
+          </div>
+      </div>
+  </div>
 
 
 

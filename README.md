@@ -7,6 +7,6 @@ Clone repository
 Inside the /airin folder in the terminal, type: ng serve --open 
 
 # Step 3:
-![alt text](https://ibb.co/vcBQ0CC)
+![alt text](https://cdn1.imggmi.com/uploads/2019/10/9/68d55609961ef1c7cded2fadb10f4c6d-full.png)
 
 

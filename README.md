@@ -1,6 +1,6 @@
 # Airin Full Stack Engineer Test
 
-#Runnning the web app:
+# Runnning the web app:
 
 ## Step 1:
 Clone repository

@@ -2,11 +2,17 @@
 
 # Step 1:
 Clone repository
+```
+git clone https://github.com/jaredworkman/airin.git
+cd airin
+
+```
 
 # Step 1:
 Inside the /airin folder in the terminal, type: 
-```ruby
+```
 ng serve --open 
+
 ```
 This will open the project in Chrome.
 

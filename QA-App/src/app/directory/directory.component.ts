@@ -16,18 +16,17 @@ export class DirectoryComponent implements OnInit {
   question: string;
   keywordQuestions = [];
     
-  constructor(
-    public firebaseService: FirebaseService
-    ) {}
+  constructor(public firebaseService: FirebaseService) {
+
+  }
 
   getAnswersKeyword(event:any){
     this.question = event.target.value;
     this.keywordQuestions = [];
     this.answers = this.QuestionsAndAnswers.get(this.question);
-    if((typeof(this.answers) == "undefined") && this.question != ''){
+    if(this.question != ''){
       this.stringList.forEach(key => {
-        console.log(key);
-        if(key.search(this.question) != -1){
+        if(key === this.question || key.search(this.question) != -1){
           this.keywordQuestions.push(key);
         }
       })
@@ -35,7 +34,6 @@ export class DirectoryComponent implements OnInit {
   }
   
   getAnswers(event: any){
-
     this.question = event.target.value;
     this.firebaseService.getAnswers(this.question).subscribe(
       data => {
@@ -44,7 +42,6 @@ export class DirectoryComponent implements OnInit {
     
   }
   getQuestions(){
-
     this.firebaseService.getQuestions().subscribe(result => {
       this.loadedQuestions = result;
       this.loadedQuestions.forEach(question => {

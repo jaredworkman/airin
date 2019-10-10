@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { FirebaseService } from './firebase.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 describe('FirebaseService', () => {
-  
   
   const FirestoreStub = {
     collection: (name: string) => ({
       doc: (_id: string) => ({
+        snapshotChanges: () => new BehaviorSubject({ foo: 'bar' }),
         set: (_d: any) => new Promise((resolve, _reject) => resolve()),
       }),
     }),

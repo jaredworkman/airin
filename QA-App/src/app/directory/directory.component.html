@@ -5,9 +5,9 @@
   <div class='results'>
       <div *ngFor="let value of keywordQuestions">
           <div class="question-card">
-            <div class="question">{{value}} </div>
+            <div class="question">{{value}}</div>
             <div *ngFor="let ans of QuestionsAndAnswers.get(value)">
-                <div class="answer-card">{{ans}}</div>
+                <div class="answer-card"><span class="bullet">&#9687;</span> {{ans}}</div>
             </div>
           </div>
       </div>

@@ -16,7 +16,5 @@ export class FirebaseService {
   getAnswers(question: string){
     return this.database.collection('/questions').doc(question).snapshotChanges()
   }
-
   
-
 }

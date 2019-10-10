@@ -6,13 +6,14 @@
 Clone repository
 ```
 git clone https://github.com/jaredworkman/airin.git
-cd airin
+cd airin/QA-App
 ```
 
 ## Step 2:
 You should have Git, Node.js, Anglular Cli,
 Inside the /airin folder in the terminal, type: 
 ```
+npm install
 ng serve --open 
 ```
 This will open the project in Chrome.
